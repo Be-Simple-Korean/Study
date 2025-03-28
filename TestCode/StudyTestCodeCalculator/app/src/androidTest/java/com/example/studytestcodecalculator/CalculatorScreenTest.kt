@@ -1,7 +1,9 @@
 package com.example.studytestcodecalculator
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
@@ -18,15 +20,26 @@ class CalculatorScreenTest {
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     @Test
-    fun whenAddButtonClicked_resultIsCorrect(){
+    fun 더하기버튼_클릭_onNodeWithText_사용(){
         // 숫자 입력
         composeTestRule.onNodeWithText("Number A").performTextInput("3")
         composeTestRule.onNodeWithText("Number B").performTextInput("5")
         // 버튼 클릭
         composeTestRule.onNodeWithText("+").performClick()
         // 결과 확인
-
         composeTestRule.onNodeWithText("Result: 8.0").assertIsDisplayed()
+    }
+
+    @Test
+    fun 더하기버튼_클릭_onNodeWithTag_사용(){
+        // 숫자 입력
+        composeTestRule.onNodeWithText("Number A").performTextInput("3")
+        composeTestRule.onNodeWithText("Number B").performTextInput("5")
+        // 버튼 클릭
+        composeTestRule.onNodeWithText("+").performClick()
+        // 결과 확인
+        composeTestRule.onNodeWithTag("resultText")
+            .assertTextEquals("Result: 9.0")
     }
 
     @Test
