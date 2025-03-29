@@ -1,4 +1,4 @@
-package com.example.studytestcodecalculator.ui.theme
+package com.example.studytestcodecalculator.ui.compose.theme
 
 import android.app.Activity
 import android.os.Build

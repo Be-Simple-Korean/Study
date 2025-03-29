@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/inputA"
+        android:hint="Number A"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/inputB"
+        android:hint="Number B"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button android:id="@+id/btnAdd" android:text="+" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content"/>
+        <Button android:id="@+id/btnSub" android:text="-" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content"/>
+        <Button android:id="@+id/btnMul" android:text="×" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content"/>
+        <Button android:id="@+id/btnDiv" android:text="÷" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textResult"
+        android:textSize="24sp"
+        android:text="Result: "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

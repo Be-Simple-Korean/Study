@@ -3,6 +3,8 @@ package com.example.studytestcodecalculator.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.studytestcodecalculator.model.Calculator
 
@@ -12,7 +14,8 @@ class CalculatorViewModel : ViewModel(){
 
     var result by mutableStateOf<Double?>(null)
         private set
-
+    private val _result2 = MutableLiveData<Double>()
+    val result2: LiveData<Double> get() = _result2
     fun calculate(a:String, b:String, op: Operation){
         val numA = a.toDoubleOrNull()
         val numB = b.toDoubleOrNull()
@@ -22,7 +25,7 @@ class CalculatorViewModel : ViewModel(){
             return
         }
 
-        result = try {
+        var pResult = try {
             when (op) {
                 Operation.ADD -> calculator.add(numA, numB)
                 Operation.SUB -> calculator.subtract(numA, numB)
@@ -32,6 +35,8 @@ class CalculatorViewModel : ViewModel(){
         } catch (e: Exception) {
             null
         }
+        result = pResult
+        _result2.value = pResult ?: 0.0
 
     }
 }
