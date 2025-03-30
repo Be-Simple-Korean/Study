@@ -33,13 +33,13 @@ class CalculatorScreenTest {
     @Test
     fun 더하기버튼_클릭_onNodeWithTag_사용(){
         // 숫자 입력
-        composeTestRule.onNodeWithText("Number A").performTextInput("3")
-        composeTestRule.onNodeWithText("Number B").performTextInput("5")
+        composeTestRule.onNodeWithTag("inputA").performTextInput("3")
+        composeTestRule.onNodeWithTag("inputB").performTextInput("5")
         // 버튼 클릭
-        composeTestRule.onNodeWithText("+").performClick()
+        composeTestRule.onNodeWithTag("+").performClick()
         // 결과 확인
         composeTestRule.onNodeWithTag("resultText")
-            .assertTextEquals("Result: 9.0")
+            .assertTextEquals("Result: 8.0")
     }
 
     @Test

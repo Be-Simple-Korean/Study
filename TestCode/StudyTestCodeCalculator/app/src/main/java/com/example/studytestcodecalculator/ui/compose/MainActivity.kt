@@ -64,12 +64,14 @@ fun CalculatorScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         OutlinedTextField(
+            modifier = Modifier.testTag("inputA"),
             value = inputA,
             onValueChange = { inputA = it },
             label = { Text("Number A") }
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
+            modifier = Modifier.testTag("inputB"),
             value = inputB,
             onValueChange = { inputB = it },
             label = { Text("Number B") }
@@ -94,8 +96,11 @@ fun CalculatorScreen(
 }
 
 @Composable
-fun OperationButton(label: String, onClick: () -> Unit) {
-    Button(onClick = onClick) {
+fun OperationButton(
+    label: String,
+    onClick: () -> Unit
+) {
+    Button(modifier = Modifier.testTag(label), onClick = onClick) {
         Text(label)
     }
 }
