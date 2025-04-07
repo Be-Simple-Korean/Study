@@ -64,4 +64,10 @@ dependencies {
     ksp("androidx.room:room-compiler:$room_version")
     val nav_version = "2.8.9"
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    // Coroutine Test
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    // Turbine (Flow 테스트용)
+    testImplementation("app.cash.turbine:turbine:1.0.0")
+
 }
