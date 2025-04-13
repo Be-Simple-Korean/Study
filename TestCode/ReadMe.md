@@ -1,3 +1,7 @@
+## 학습 방법
+- ChatGPT를 활용해 테스트 코드 학습 로드맵을 총 14단계로 구성
+- 각 레벨은 개념 → 실습 → 미션 순서로 구성되어 있으며, 단계별로 학습을 수행
+- https://believed-ocelot-f40.notion.site/1c22555478038044b252e3f2fc4b0103?pvs=4
 ## StudyTestCodeCalculator
 - 기본적인 Unit Test, UI Test 학습
 - Junit4, Espresso, ComposeUiTest 학습
