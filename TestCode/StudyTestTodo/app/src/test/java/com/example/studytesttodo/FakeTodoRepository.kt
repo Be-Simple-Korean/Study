@@ -12,7 +12,7 @@ class FakeTodoRepository : TodoRepository {
 
     override suspend fun addTodo(title: String) {
         val new = Todo(id = (todos.value.maxOfOrNull { it.id } ?: 0) + 1, title = title)
-        todos.value = todos.value + new
+        todos.value += new
     }
 
     override suspend fun toggleTodo(todo: Todo) {
