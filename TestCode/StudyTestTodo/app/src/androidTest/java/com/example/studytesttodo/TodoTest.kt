@@ -8,7 +8,10 @@ import com.example.studytesttodo.data.db.TodoDAO
 import com.example.studytesttodo.data.db.TodoDatabase
 import com.example.studytesttodo.data.db.TodoEntity
 import com.example.studytesttodo.domain.TodoRepository
+import com.example.studytesttodo.ui.TodoViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -23,6 +26,7 @@ class TodoTest {
     private lateinit var db: TodoDatabase
     private lateinit var dao : TodoDAO
     private lateinit var repository: TodoRepository
+    private lateinit var viewModel: TodoViewModel
 
 
     @Before
@@ -33,38 +37,42 @@ class TodoTest {
         ).allowMainThreadQueries().build()
         dao = db.todoDao()
         repository = TodoRepositoryImpl(dao)
+        viewModel = TodoViewModel(repository)
     }
 
     @Test
     fun addTest() = runTest {
-        val todo = TodoEntity(title = "룸 테스트")
-        dao.insertTodo(todo)
+        viewModel.addTodo("뷰모델 테스트")
+        val result = viewModel.todos.first { it.isNotEmpty() }
 
-        val result = dao.getAllTodos().first()
         assertEquals(1, result.size)
-        assertEquals("룸 테스트", result.first().title)
+        assertEquals("뷰모델 테스트", result.first().title)
     }
 
     @Test
     fun updateTest() = runTest {
-        repository.addTodo("토글 대상")
-        val todo = repository.getTodos().first().first()
+        viewModel.addTodo("토글 테스트")
 
-        repository.toggleTodo(todo)
+        val todo = viewModel.todos.first{it.isNotEmpty()}
+        val data = todo.first()
+        viewModel.toggleTodo(data)
+        val updatedList = viewModel.todos.first { list ->
+            list.any { it.id == data.id && it.isDone != data.isDone }
+        }
+        val updated = updatedList.first { it.id == data.id }
 
-        val updated = repository.getTodos().first().first { it.id == todo.id }
-        assertEquals(!todo.isDone, updated.isDone)
+        assertEquals(!data.isDone, updated.isDone)
     }
 
     @Test
     fun deleteTest() = runTest {
-        repository.addTodo("삭제 대상")
-        val todo = repository.getTodos().first().first()
+        viewModel.addTodo("삭제 테스트")
+        val todo = viewModel.todos.first { it.isNotEmpty() }
 
-        repository.deleteTodo(todo)
+        viewModel.deleteTodo(todo.first())
 
-        val list = repository.getTodos().first()
-        assertTrue(list.none { it.id == todo.id })
+        val deletedList = viewModel.todos.first { it.isEmpty() } // ✅ 조건 변경
+        assertTrue(deletedList.none { it.id == todo.first().id })
     }
 
     @After
