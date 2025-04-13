@@ -4,6 +4,6 @@
 ## StudyTestCodeLogin
 - ViewModel, Repository패턴을 사용한 앱에서 테스트 코드
 - 뷰모델의 비동기 로직 테스트 및 Mockito 학습
-- ## StudyTestCodeTodo
+- ## StudyTestTodo
 - Room, ViewModel, Repository패턴을 사용한 앱에서 테스트 코드
 - 뷰모델, 저장소 패턴의 로직 테스트 및 Room 테스트 학습
