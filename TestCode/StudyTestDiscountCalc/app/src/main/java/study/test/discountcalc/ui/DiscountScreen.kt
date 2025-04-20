@@ -1,6 +1,5 @@
 package study.test.discountcalc.ui
 
-import android.widget.Space
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,27 +11,34 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import study.test.discountcalc.Greeting
-import study.test.discountcalc.ui.theme.StudyTestDiscountCalcTheme
-
+import study.test.discountcalc.DiscountViewModel
 
 @Composable
-fun DiscountScreen(modifier: Modifier = Modifier) {
+fun DiscountScreen(
+    modifier: Modifier = Modifier,
+    viewModel : DiscountViewModel = remember { DiscountViewModel() }
+) {
+    val originalPrice by viewModel.originalPrice.collectAsState()
+    val discountPer by viewModel.discountPer.collectAsState()
+    val finalPrice by viewModel.finalPrice.collectAsState()
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
         TextField(
-            value = "",// TODO
+            value = originalPrice,
             onValueChange = {
-                // TODO
+                viewModel.setOriginalPrice(it)
             },
             label = { Text("원가") },
             modifier = Modifier
@@ -42,8 +48,9 @@ fun DiscountScreen(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
-            value = "", // TODO
-            onValueChange = { // TODO
+            value = discountPer,
+            onValueChange = {
+                viewModel.setDiscountPer(it)
             },
             label = { Text("할인율(%)") },
             modifier = Modifier
@@ -56,7 +63,7 @@ fun DiscountScreen(modifier: Modifier = Modifier) {
 
         Button(
             onClick = {
-                // Todo
+                viewModel.calculateFinalPrice()
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -68,7 +75,7 @@ fun DiscountScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "최종 금액:  원", // todo
+            text = "최종 금액: $finalPrice 원",
             modifier = Modifier.testTag("resultText"),
             fontSize = 20.sp
         )
