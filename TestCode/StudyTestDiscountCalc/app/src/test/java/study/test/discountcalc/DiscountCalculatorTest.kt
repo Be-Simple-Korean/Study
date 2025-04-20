@@ -1,5 +1,6 @@
 package study.test.discountcalc
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class DiscountCalculatorTest {
