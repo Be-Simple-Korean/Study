@@ -3,6 +3,7 @@ package study.test.discountcalc
 class DiscountCalculator {
 
     fun calculatorFinalPrice(originalPrice: Int, discountPercent: Double): Int {
-        return 8000
+        val discountAmount = originalPrice * (discountPercent/100)
+        return (originalPrice - discountAmount).toInt()
     }
 }
