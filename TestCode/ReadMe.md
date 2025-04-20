@@ -12,3 +12,6 @@
 ## StudyTestTodo
 - Room, ViewModel, Repository패턴을 사용한 앱에서 테스트 코드
 - 뷰모델, 저장소 패턴의 로직 테스트 및 Room 테스트 학습
+
+## StudyTestDiscountCalc
+- TDD기법을 적용하여 개발한 할인 계산기앱
